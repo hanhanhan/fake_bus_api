@@ -1,13 +1,47 @@
-import ssl
-from quart import Quart
+from quart import Quart, g
+import json
+import time
+from bus_schedule_builder import make_schedule
 
 
 app = Quart(__name__)
 
 
-@app.route('/')
-async def hello():
-    return 'hello'
+def get_nearest_bus_index(timestamp, stop_times):
+    index = 0
+    while stop_times[index] <= timestamp:
+        index += 1
+    
+    # if index = 0:
+
+    return index
+
+def make_bus_stop_schedule(timestamp, stop_id):
+    for route, stops in g.schedule.items():
+        schedule[route] = stops[stop_id]
+
+    return schedule
+
+
+@app.before_request
+def before_request():
+    g.schedule = make_schedule()
+
+
+@app.route('/<stop_id>')
+async def hello(stop_id):
+    try:
+        stop_id = int(stop_id)
+    except ValueError:
+             return '404 Not Found - Use Bus Stop ID from 1 to 10'
+
+    if stop_id not in range(1, 11):
+        return '404 Not Found - Use Bus Stop ID from 1 to 10'
+    
+    minutes_timestamp = time.gmtime(time.time()).tm_min
+    schedule = make_bus_stop_schedule(minutes_timestamp, stop_id)
+
+    return json.dumps(schedule)
 
 
 # @app.websocket('ws')
@@ -15,13 +49,4 @@ async def hello():
 #     while True:
 #         await websocket.send('hello')
 
-ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-ssl_context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_COMPRESSION
-ssl_context.set_ciphers('ECDHE+AESGCM')
-# name is from Privacy Enhanced Mail (PEM), a failed method for secure email but the container format it used lives on, and is a base64 translation of the x509 ASN.1 keys
-# key This is a PEM formatted file containing just the private-key of a specific certificate and is merely a conventional name 
-ssl_context.load_cert_chain(certfile='cert.pem', keyfile='key.pem')
-ssl_context.set_alpn_protocols(['h2', 'http/1.1'])
-app.run(port=5000, ssl=ssl_context)
-
-# app.run(port=5000)
+app.run(port=8000)

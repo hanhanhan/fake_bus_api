@@ -1,3 +1,6 @@
+""" This script creates a dictionary of routes -> 
+bus stops -> a list of times
+"""
 
 BUS_STOPS = range(1, 11)
 SAME_ROUTE_START_INTERVAL = 15
@@ -8,9 +11,7 @@ DRIVE_TIME_BETWEEN_STOPS = 2
 
 # Routes dictionary 
 # to hold another dictionary of stops -> list of minutes past hour
-r1_schedule = {}
-r2_schedule = {}
-r3_schedule = {}
+routes = ['r1', 'r2', 'r3']
 
 # First bus of each hour for each route
 r1_start = 0
@@ -22,16 +23,12 @@ r1_starts = range(r1_start, 60, SAME_ROUTE_START_INTERVAL)
 r2_starts = range(r2_start, 60, SAME_ROUTE_START_INTERVAL)
 r3_starts = range(r3_start, 60, SAME_ROUTE_START_INTERVAL)
 
+
 routes_starts = { 'r1': r1_starts, 
                   'r2': r2_starts, 
                   'r3': r3_starts, }
 
-schedules = { 'r1': r1_schedule,
-              'r2': r2_schedule,
-              'r3': r3_schedule, }
-
-
-def make_route_schedule(minutes, schedule={}):
+def make_route_schedule(minutes, schedule):
     ''' Pass in start time in minutes and schedule dictionary to build route schedule.
     '''
     for bus_stop in BUS_STOPS:
@@ -48,6 +45,8 @@ def make_route_schedule(minutes, schedule={}):
 def make_schedule():
     """ Return a dictionary of routes -> schedules by route
     """
+    schedules = {route: {} for route in routes}
+
     for route, schedule in schedules.items():
         starts = routes_starts[route]
         for start in starts:
