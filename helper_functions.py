@@ -1,5 +1,6 @@
 """ Helper functions used to filter the overall bus schedule.
 """
+from bus_schedule_builder import make_schedule
 
 
 def get_next_bus_i(time, stop_times):
@@ -44,11 +45,12 @@ def get_next_next_bus_i(i, stop_times):
         return i + 1
 
 
-def make_stop_filtered_schedule(timestamp, stop_id, schedule):
+def make_stop_filtered_schedule(timestamp, stop_id):
     # Filter the complete schedule to return a dictionary of
     # the next two buses arriving on each route
 
     filtered_schedule = {}
+    schedule = make_schedule()
 
     for route, bus_stops_schedules in schedule.items():
         next_two_buses = []

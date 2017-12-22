@@ -1,3 +1,41 @@
+Try flask-socketio
+env is fake_bus
+
+without geventlet:
+>python hello.py
+WebSocket transport not available. Install eventlet or gevent and gevent-websocket for improved performance.
+
+>pip install eventlet
+>python hello.py 
+program hangs
+
+>FLASK_APP=hello.py flask run
+ImportError: No module named 'flask_socketio'
+
+> pip freeze
+certifi==2016.2.28
+click==6.7
+enum-compat==0.0.2
+eventlet==0.21.0
+Flask==0.12.2
+Flask-SocketIO==2.9.3
+greenlet==0.4.12
+itsdangerous==0.24
+Jinja2==2.10
+MarkupSafe==1.0
+python-engineio==2.0.1
+python-socketio==1.8.4
+six==1.11.0
+Werkzeug==0.13
+
+python=3.6
+
+>pip uninstall eventlet
+
+https://github.com/miguelgrinberg/Flask-SocketIO/issues/164
+
+---------------
+
 <!-- https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl -->
 
 <!-- https://stackoverflow.com/questions/21297139/how-do-you-sign-certificate-signing-request-with-your-certification-authority/21340898#21340898 -->
