@@ -13,7 +13,11 @@ does using broadcast lessen connections?
 
 testing recommendations
 
+server 
+settimeout()
 
+register in memory
+memcache
 ---------------
 
 export FLASK_DEBUG=1 (or not!), secret key

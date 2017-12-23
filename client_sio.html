@@ -10,26 +10,60 @@
 
     <!-- from flask socketio docs example https://flask-socketio.readthedocs.io/en/latest/ -->
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script> -->
     <!-- <script src='/socket.io/socket.io.js'></script> -->
+    <!-- <script> -->
+
+    <script src="/socket.io/socket.io.js"></script>
+
     <script>
+        var socket = io.connect('http://localhost');
+        
+        // what is 'news' name of ???
+        // what gets passed into the function?
+        // what passes in data?
+        // is socketio 2 compatible with server?
+        // can socket be a const?
+        // would pattern of id in url -> route -> ws connection make sense?
+        // does creating the socket at the client open the connection? io() vs io.connect()
+
+        socket.on('message', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+        });
+    </script>
+
+<!--     <script>
         document.addEventListener("DOMContentLoaded", function(){
+        
         var socket = io.connect('http://127.0.0.1:5000');
+        
         socket.on(
             'connect', 
             function() {
                 socket.emit('my event', {data: 'I\'m connected!'};
-        });
 
         });
-    </script>
+    </script> -->
 
 </head>
 
 <body>
     <!-- Your page content here. -->
     <h1>Hello there, I'm the socketio page.</h1>
-    <div></div>
+    
     <div id='ws_data'></div>
+    <div>
+    <input type="number" name="number_input" id="number_input">
+    </div>
+
+    <label>Choose an ice cream flavor:
+    <select id="ice-cream" name="ice-cream">
+        <option value="">Select One …</option>
+        <option value="chocolate">Chocolate</option>
+        <option value="strawberry">Strawberry</option>
+        <option value="vanilla">Vanilla</option>
+    </select>
+</label>
 </body>
 </html>

@@ -19,13 +19,18 @@ socketio = SocketIO(app)
 @socketio.on('connect')
 def test_connect():
     print('connection made')
-    emit('my response', {'data': 'Connected'}, broadcast=True)
+    emit('my response', {'data': 'Connected'})
+
 
 @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message)
 
-# # View + Path
+@app.route('/')
+def index():
+    return 'hi im the index'
+
+# View + Path
 # @app.route('/<stop_id>')
 # def bus_stop_schedule(stop_id):
 
@@ -52,7 +57,6 @@ def text(message):
     The message is sent to all people in the room."""
     room = session.get('room')
     emit('message', {'msg': session.get('name') + ':' + message['msg']}, room=room)
-
 
 
 if __name__ == '__main__':
