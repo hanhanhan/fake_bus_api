@@ -10,6 +10,7 @@ from helper_functions import make_stop_filtered_schedule
 
 # Initialization
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 # View + Path
@@ -31,6 +32,15 @@ def bus_stop_schedule(stop_id):
 
 def error_response():
     return make_response('404 Not Found - Use Bus Stop ID from 1 to 10', 404)
+
+
+@socketio.on('json', namespace='/<int>')
+def text(message):
+    """Sent by a client when the user entered a new message.
+    The message is sent to all people in the room."""
+    room = session.get('room')
+    emit('message', {'msg': session.get('name') + ':' + message['msg']}, room=room)
+
 
 
 if __name__ == '__main__':

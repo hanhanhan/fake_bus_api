@@ -1,3 +1,11 @@
+export FLASK_DEBUG=1 (or not!), secret key
+export FLASK_APP=main.py
+flask run
+
+websocket command line client
+$ wscat -c ws://echo.websocket.org -p 13
+----------------
+
 Try flask-socketio
 env is fake_bus
 
