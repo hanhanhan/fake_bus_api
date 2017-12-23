@@ -1,3 +1,21 @@
+websockets
+
+All client connections go to same URL?
+information is sent (vanilla websockets)/emitted (named function)
+
+send from server at interval -- yield, while loop?
+
+send to server from client -- second ws route?
+
+client:
+where in the document should I initialize the connection?
+does using broadcast lessen connections?
+
+testing recommendations
+
+
+---------------
+
 export FLASK_DEBUG=1 (or not!), secret key
 export FLASK_APP=main.py
 flask run

@@ -3,31 +3,43 @@ import json
 import time
 # Third Party Libraries
 from flask import Flask, make_response
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit, send
 # Project Functions
 from helper_functions import make_stop_filtered_schedule
 
 
 # Initialization
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-# View + Path
-@app.route('/<stop_id>')
-def bus_stop_schedule(stop_id):
+# @socketio.on('json')
+# def handle_json(json):
+#     print('received json: ' + str(json))
 
-    try:
-        stop_id = int(stop_id)
-    except ValueError:
-        return error_response()
+@socketio.on('connect')
+def test_connect():
+    print('connection made')
+    emit('my response', {'data': 'Connected'}, broadcast=True)
 
-    if stop_id not in range(1, 11):
-        return error_response()
+@socketio.on('message')
+def handle_message(message):
+    print('received message: ' + message)
 
-    minutes_timestamp = time.gmtime(time.time()).tm_min
-    schedule = make_stop_filtered_schedule(minutes_timestamp, stop_id)
-    return json.dumps(schedule)
+# # View + Path
+# @app.route('/<stop_id>')
+# def bus_stop_schedule(stop_id):
+
+#     try:
+#         stop_id = int(stop_id)
+#     except ValueError:
+#         return error_response()
+
+#     if stop_id not in range(1, 11):
+#         return error_response()
+
+#     minutes_timestamp = time.gmtime(time.time()).tm_min
+#     schedule = make_stop_filtered_schedule(minutes_timestamp, stop_id)
+#     return json.dumps(schedule)
 
 
 def error_response():

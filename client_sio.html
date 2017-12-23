@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SocketIO</title>
+
+
+
+    <!-- from  https://socket.io/blog/ -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> -->
+
+    <!-- from flask socketio docs example https://flask-socketio.readthedocs.io/en/latest/ -->
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <!-- <script src='/socket.io/socket.io.js'></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+        var socket = io.connect('http://127.0.0.1:5000');
+        socket.on(
+            'connect', 
+            function() {
+                socket.emit('my event', {data: 'I\'m connected!'};
+        });
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <!-- Your page content here. -->
+    <h1>Hello there, I'm the socketio page.</h1>
+    <div></div>
+    <div id='ws_data'></div>
+</body>
+</html>
