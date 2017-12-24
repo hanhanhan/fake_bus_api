@@ -24,7 +24,11 @@ def bus_stop_schedule(stop_id):
 
     minutes_timestamp = time.gmtime(time.time()).tm_min
     schedule = make_stop_filtered_schedule(minutes_timestamp, stop_id)
-    return json.dumps(schedule)
+    
+    # NOTE: putting in decorator would be nice
+    response = make_response(json.dumps(schedule))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 def error_response():

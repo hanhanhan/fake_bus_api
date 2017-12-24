@@ -8,37 +8,80 @@
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 
 
-
-    <!-- from  https://socket.io/blog/ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-
-    <!-- from flask socketio docs example https://flask-socketio.readthedocs.io/en/latest/ -->
-    <!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script> -->
-    
-    <script>
-        var socket = io.connect('http://127.0.0.1:5000/5');
-        socket.on(
-            'connect', 
-            function() {
-            socket.emit('my event', {data: 'I\'m connected!'};
-        });
-    </script>
-
-    <script>
-        var socket = io.connect('http://127.0.0.1:5000/5');
-        socket.on(
-            'connect', 
-            function() {
-            socket.emit('location', {lat: '300', lon: '80'};
-        });
-    </script>
 </head>
 
 <body>
   <ons-page>
 
     <!-- Your page content here. -->
-    <h1>HEllo there</h1>
+    <h1>Hello there</h1>
+    <div id="schedule"></div>
+    <select multiple id="bus_stop"> 
+    <!-- is this two ids with space? -->
+        <option class="option" value="volvo">Volvo</option>
+        <option class="option" value="saab">Saab</option>
+        <option class="option" value="opel">Opel</option>
+        <option class="option" value="audi">Audi</option>
+    </select>
   </ons-page>
+
+<script>
+    // selected bus stops ->
+    // list of selected bus stops
+    // added then getSchedule -> update display
+    // removed then -> update display
+
+
+    // all bus stops, selected bus stops
+    document.addEventListener("DOMContentLoaded", selectDefaultBusStops)
+    
+    function getSchedule(stop_id){
+
+        let xhttp = new XMLHttpRequest()
+        
+        xhttp.open('GET', `http://127.0.0.1:5000/{stop_id}`)
+
+        xhttp.timeout = 2000
+
+        xhttp.onerror = () => { console.log("xhttp error") }
+
+        xhttp.onreadystatechange = updateSchedule
+
+        // () => {
+        //     console.log(xhttp.status)
+        //     console.log(xhttp.responseText)
+        // }
+
+    }
+
+
+    function selectDefaultBusStops(){
+        // something with location services
+    }
+
+
+    let bus_stops = document.getElementById("bus_stop")
+    bus_stops.addEventListener("click", getSchedule)
+    
+    let nearestBusStops = [0, 1]
+    nearestBusStops.forEach(
+        stop => { bus_stops[stop].setAttribute(selected="selected") })
+
+    let bus_stops_selected = bus_stops.selectedOptions
+
+    function getSchedule(){
+        console.log("get that schedule")
+        // bus_stops.forEach((stop)=>console.log(stop.label))
+    }
+
+    function updateSchedule(api_response){
+        api_response = '{"r1": [34, 49], "r2": [36, 51], "r3": [38, 53]}'
+
+
+    }
+
+
+    
+</script>
 </body>
 </html>
