@@ -2,16 +2,18 @@
 import json
 import time
 # Third Party Libraries
-from flask import Flask, make_response
+from flask import Flask, make_response, render_template
 # Project Functions
 from helper_functions import make_stop_filtered_schedule
 
 
 # Initialization
 app = Flask(__name__)
+app.debug = True
+
 
 # View + Path
-@app.route('/<stop_id>')
+@app.route('/<int:stop_id>')
 def bus_stop_schedule(stop_id):
 
     try:
@@ -34,6 +36,10 @@ def bus_stop_schedule(stop_id):
 def error_response():
     return make_response('404 Not Found - Use Bus Stop ID from 1 to 10', 404)
 
+
+@app.route('/client')
+def pretend_client():
+    return render_template('client.html')
 
 
 if __name__ == '__main__':
