@@ -1,4 +1,73 @@
 {% extends 'base.html' %}
 {% block contents %}
-<h1>hi there</h1>
+<div class="container">
+    <div class="bus_stop_selection">
+    <h1>Bus Stops</h1>
+    <select multiple size="10" id="bus_stop">
+        {% for stop in range(1,11) %}
+            <option value="{{stop}}">{{stop}}</option>
+        {% endfor %}
+    <select>
+    </div>
+
+    <div class="schedule">
+        <h3>Bus Stop 1</h3>
+        <ul class="routes">
+            <li class="route one">
+                Route 1
+                <ul class="times">
+                    <li class="">3 min</li>
+                    <li class="">3 min</li>
+                    <li class="">3 min</li>
+                </ul>
+            </li>
+            
+            <li class="route two">
+                Route 2
+                <ul class="times">
+                    <li>3 min</li>
+                    <li>3 min</li>
+                    <li>3 min</li>
+                </ul>
+            </li>
+
+            <li class="route three">
+                Route 3
+                <ul class="times">
+                    <li>3 min</li>
+                    <li>3 min</li>
+                    <li>3 min</li>
+                </ul>
+            </li>
+    </div>
+
+
+
+    <div class="schedule row">
+        <h3>Bus Stop 2</h3>
+        <ul class="routes">
+            <li class="route">Route 1</li>
+            <ul class="times">
+                <li>3 min</li>
+                <li>3 min</li>
+                <li>3 min</li>
+            </ul>
+            
+            <li class="route">Route 2</li>
+            <ul class="times">
+                <li>3 min</li>
+                <li>3 min</li>
+                <li>3 min</li>
+            </ul>
+            <li class="route">Route 3</li>
+            <ul class="times">
+                <li>3 min</li>
+                <li>3 min</li>
+                <li>3 min</li>
+            </ul>
+        </ul>
+    </div>
+</div>
+
+<script src="/static/route_select.js"></script>
 {% endblock %}

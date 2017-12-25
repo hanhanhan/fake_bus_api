@@ -1,0 +1,53 @@
+/*
+(e.g. ul.nav { text-align: center; }) 
+and the list items inline-block 
+(e.g. ul.nav li { display: inline-block; }). 
+If you want to do it with margin for whatever reason, look into 
+width: fit-content;*/
+
+:root {
+    --route1-color: blue;
+    --route2-color: #71BF9F;
+    --route3-color: orange;  
+}
+
+body { 
+    overflow-y: visible;
+}
+
+.schedule {
+    border: 1px solid black;
+}
+
+.routes {
+    display: inline;
+}
+
+
+
+.route.one {
+    background-color: var(--route1-color);
+}
+
+.route.two {
+    background-color: var(--route2-color);
+}
+
+.route.three {
+    background-color: var(--route3-color);
+}
+
+.times {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.times li {
+    /*display: inline-block;*/
+}
+
+ul {
+    list-style: none;
+}

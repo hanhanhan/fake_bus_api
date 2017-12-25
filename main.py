@@ -13,7 +13,7 @@ app.debug = True
 
 
 # View + Path
-@app.route('/<int:stop_id>')
+@app.route('/api/<stop_id>')
 def bus_stop_schedule(stop_id):
 
     try:
