@@ -39,7 +39,16 @@ def error_response():
 
 @app.route('/client')
 def pretend_client():
-    return render_template('client.html')
+    placeholder = '5'
+    bus_stops = [1, 2]
+    return render_template('client.html', **{
+        'bus_stops': bus_stops,
+        'r1_times': f'{placeholder} min, {placeholder} min',
+        'r2_times': f'{placeholder} min, {placeholder} min',
+        'r3_times': f'{placeholder} min, {placeholder} min',
+        })
+
+
 
 
 if __name__ == '__main__':
