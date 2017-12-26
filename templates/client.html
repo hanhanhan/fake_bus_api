@@ -1,34 +1,14 @@
 {% extends 'base.html' %}
 {% block contents %}
 <div class="container">
-    <div class="bus_stop_selection">
-    <h1>FakeBus Metro</h1>
-    <select multiple size="10" id="bus_stop">
-        {% for stop in range(1,11) %}
-            <option value="{{stop}}">{{stop}}</option>
-        {% endfor %}
-    <select>
+    <div>
+    <h2 class="title">FakeBus Metro</h2>
     </div>
 
-
-   <div id="map"></div>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-    </script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4ZxaLe5MrDGXPUk_XtR5BMugmd7KtxTw&callback=initMap"async defer>
-</script>
-
-<iframe src="//www.google.com/maps/embed/v1/place?q=Harrods,Brompton%20Rd,%20UK
+<!-- <iframe src="//www.google.com/maps/embed/v1/place?q=Harrods,Brompton%20Rd,%20UK
       &zoom=17
       &key=AIzaSyC4ZxaLe5MrDGXPUk_XtR5BMugmd7KtxTw">
-  </iframe>
+  </iframe> -->
 
 
 <div class="schedule">
@@ -90,6 +70,17 @@
   </tbody>
 </table>
 </div>
+
+<div>
+    <h3>Which Bus Stops?</h3>
+    <div class="bus-stop">
+        {% for stop in range(1,11) %}
+            <label>
+                <input type="checkbox" hidden value="{{stop}}" size="10" class="bus-stop">
+            <span>{{stop}}</span>
+            </label>
+        {% endfor %}
+    </div>
 </div>
 
 <script src="/static/route_select.js"></script>

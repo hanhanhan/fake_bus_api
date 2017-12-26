@@ -15,10 +15,15 @@ body {
     overflow-y: visible;
 }
 
+.title {
+    /*position: static;*/
+    margin-top: 2rem;
+}
+
 .schedule {
     border: 1px solid black;
     padding: 10px;
-    margin: 10px;
+    margin: 0px 0px 20px 0px;
 }
 
 .routes {
@@ -57,7 +62,51 @@ ul {
     list-style: none;
 }
 
-caption {
-    display: table-caption;
-    text-align: -webkit-left;
+
+div label input {
+   margin-right:100px;
+}
+
+body {
+    font-family:sans-serif;
+}
+
+.bus-stop {
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:0px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    float:left;
+}
+
+.bus-stop label {
+    float:left;
+    width:4.0em;
+}
+
+.bus-stop label span {
+    text-align:center;
+    padding:3px;
+    display:block;
+}
+
+.bus-stop label input {
+    position:absolute;
+    right:200%;
+}
+
+.bus-stop input:checked + span {
+    background-color: black;
+    color:#fff;
+}
+
+.bus-stop input:hover + span {
+    background-color: slategray;
+    color:#fff;
+}
+
+.bus-stop input:checked:hover + span {
+    background-color: gray;
+    color:#fff;
 }
