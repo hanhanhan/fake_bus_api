@@ -6,7 +6,7 @@ If you want to do it with margin for whatever reason, look into
 width: fit-content;*/
 
 :root {
-    --route1-color: blue;
+    --route1-color: lightblue;
     --route2-color: #71BF9F;
     --route3-color: orange;  
 }
@@ -17,13 +17,18 @@ body {
 
 .schedule {
     border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
 }
 
 .routes {
     display: inline;
 }
 
-
+th:first-child, td:first-child, .route {
+    padding-left: 12px;
+    font-weight: bolder;
+}
 
 .route.one {
     background-color: var(--route1-color);
@@ -50,4 +55,9 @@ body {
 
 ul {
     list-style: none;
+}
+
+caption {
+    display: table-caption;
+    text-align: -webkit-left;
 }
