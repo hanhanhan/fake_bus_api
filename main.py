@@ -4,7 +4,7 @@ import time
 # Third Party Libraries
 from flask import Flask, make_response, render_template
 # Project Functions
-from helper_functions import make_stop_filtered_schedule
+from bus_schedule_filter import make_stop_filtered_schedule
 
 
 # Initialization
@@ -47,8 +47,6 @@ def pretend_client():
         'r2_times': f'{placeholder} min, {placeholder} min',
         'r3_times': f'{placeholder} min, {placeholder} min',
         })
-
-
 
 
 if __name__ == '__main__':

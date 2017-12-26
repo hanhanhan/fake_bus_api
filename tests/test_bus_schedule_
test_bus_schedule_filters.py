@@ -3,16 +3,18 @@ sys.path.append("..")
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 import unittest
-from helper_functions import get_next_bus_i, make_stop_filtered_schedule
+from bus_schedule_filter import get_next_bus_i, make_stop_filtered_schedule
 from bus_schedule_builder import make_schedule
 
 
-class TestHelperFunctions(unittest.TestCase):
+class TestBusScheduleFilterFunctions(unittest.TestCase):
 
     # Test get_next_bus_i and edge cases
     def test_get_next_bus_i_wrap(self):
         stop_times = [3, 18, 33, 48]
         timestamp = 5
+
+        # import pdb; pdb.set_trace()
         index = get_next_bus_i(timestamp, stop_times)
         self.assertEqual(index, 1)
 
@@ -43,7 +45,7 @@ class TestHelperFunctions(unittest.TestCase):
                               'r2':[17, 32],
                               'r3':[19, 34], }
 
-        filtered_schedule = make_stop_filtered_schedule(timestamp, stop_id, schedule)
+        filtered_schedule = make_stop_filtered_schedule(timestamp, stop_id)
         self.assertEqual(filtered_schedule, expected_schedule)
 
     def test_get_next_bus_i_wrap_schedule(self):
@@ -54,7 +56,7 @@ class TestHelperFunctions(unittest.TestCase):
                               'r2':[5, 20],
                               'r3':[7, 22], }
 
-        filtered_schedule = make_stop_filtered_schedule(timestamp, stop_id, schedule)
+        filtered_schedule = make_stop_filtered_schedule(timestamp, stop_id)
         self.assertEqual(filtered_schedule, expected_schedule)
 
 
