@@ -46,7 +46,7 @@ to run the server
     ```
     from inside the fake_bus directory, or just `python testname.py` to run an individual test.
 
-2. Step through debugger - insert 
+2. To step through code using the debugger, insert 
     ```
     import ipdb; pdb.set_trace()
     ```
