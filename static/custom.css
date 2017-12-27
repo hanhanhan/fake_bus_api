@@ -1,10 +1,3 @@
-/*
-(e.g. ul.nav { text-align: center; }) 
-and the list items inline-block 
-(e.g. ul.nav li { display: inline-block; }). 
-If you want to do it with margin for whatever reason, look into 
-width: fit-content;*/
-
 :root {
     --route1-color: lightblue;
     --route2-color: #71BF9F;
@@ -35,15 +28,15 @@ th:first-child, td:first-child, .route {
     font-weight: bolder;
 }
 
-.route.one {
+.route.route-1 {
     background-color: var(--route1-color);
 }
 
-.route.two {
+.route.route-2 {
     background-color: var(--route2-color);
 }
 
-.route.three {
+.route.route-3 {
     background-color: var(--route3-color);
 }
 
@@ -88,6 +81,7 @@ body {
 .bus-stop label span {
     text-align:center;
     padding:3px;
+    padding-top: 1em;
     display:block;
 }
 

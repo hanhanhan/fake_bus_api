@@ -1,5 +1,6 @@
 # Built In Libraries
 import json
+import re
 import time
 # Third Party Libraries
 from flask import Flask, make_response, render_template
@@ -34,7 +35,6 @@ def bus_stop_schedule(stop_id):
     minutes_timestamp = time.gmtime(time.time()).tm_min
     schedule = make_stop_filtered_schedule(minutes_timestamp, stop_id)
     
-    # NOTE: putting in decorator would be nice
     response = make_response(json.dumps(schedule))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
@@ -46,14 +46,26 @@ def error_response():
 
 @app.route('/client')
 def pretend_client():
-    placeholder = '5'
-    bus_stops = [1, 2]
-    return render_template('client.html', **{
-        'bus_stops': bus_stops,
-        'r1_times': f'{placeholder} min, {placeholder} min',
-        'r2_times': f'{placeholder} min, {placeholder} min',
-        'r3_times': f'{placeholder} min, {placeholder} min',
-        })
+    stop_ids = [1, 2]
+    schedule = {}
+    
+    for stop_id in stop_ids:
+        minutes_timestamp = time.gmtime(time.time()).tm_min
+        stop_schedule = make_stop_filtered_schedule(minutes_timestamp, stop_id)
+        schedule[stop_id] = format_(stop_schedule)
+
+    return render_template('client.html', schedule=schedule)
+
+
+def format_(routes_schedule):
+    formatted = {}
+    
+    for route, minutes in routes_schedule.items():
+        route_match = re.search('\w(\d*)', route)
+        route_id = route_match.groups()[0]
+        formatted[route_id] = f'{minutes[0]} min, {minutes[1]} min'
+    
+    return formatted
 
 
 if __name__ == '__main__':

@@ -57,7 +57,7 @@ def get_next_next_bus_i(i, stop_times):
 
 def make_stop_filtered_schedule(timestamp, stop_id):
     # Filter the complete schedule to return a dictionary of
-    # the next two buses arriving on each route.
+    # the minutes until the next two buses arriving on each route.
 
     filtered_schedule = {}
     schedule = make_schedule()
@@ -69,9 +69,15 @@ def make_stop_filtered_schedule(timestamp, stop_id):
         next_bus_index = get_next_bus_i(timestamp, stop_times)
         next_next_bus_index = get_next_next_bus_i(next_bus_index, stop_times)
 
-        next_two_buses.append(stop_times[next_bus_index])
-        next_two_buses.append(stop_times[next_next_bus_index])
+        minutes_to_next_bus = minutes_diff(timestamp, stop_times[next_bus_index])
+        minutes_to_next_next_bus = minutes_diff(timestamp, stop_times[next_next_bus_index])
+
+        next_two_buses.append(minutes_to_next_bus)
+        next_two_buses.append(minutes_to_next_next_bus)
 
         filtered_schedule[route] = next_two_buses
 
     return filtered_schedule
+
+
+

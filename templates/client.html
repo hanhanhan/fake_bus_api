@@ -5,7 +5,7 @@
     <h2 class="title">FakeBus</h2>
     </div>
 
-{% for stop in bus_stops %}
+{% for stop in schedule.keys() %}
     {% include 'schedule.html' %}
 {% endfor %}
 

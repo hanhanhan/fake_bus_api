@@ -11,20 +11,12 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td class="route one">1</td>
-        <td>{{r1_times}}</td>
+      {% for route in schedule[stop] %}
+        <tr>
+          <td class="route route-{{route}}">{{route}}</td>
+          <td>{{ schedule[stop][route] }}</td>      
       </tr>
-
-      <tr>
-        <td class="route two">2</td>
-        <td>{{r2_times}}</td>
-      </tr>
-
-      <tr>
-        <td class="route three">3</td>
-        <td>{{r3_times}}</td>
-      </tr>
+      {% endfor %}
     </tbody>
 
   </table>
