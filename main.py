@@ -54,7 +54,7 @@ def pretend_client():
         stop_schedule = make_stop_filtered_schedule(minutes_timestamp, stop_id)
         schedule[stop_id] = format_(stop_schedule)
 
-    return render_template('client.html', schedule=schedule)
+    return render_template('client.html', schedule=schedule, timestamp=time.time())
 
 
 def format_(routes_schedule):
