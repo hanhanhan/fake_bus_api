@@ -1,6 +1,16 @@
 """ Helper functions used to filter the overall bus schedule.
 """
-from bus_schedule_builder import make_schedule
+from bus_schedule import make_schedule
+
+
+def minutes_diff(minutes_now, minutes_bus):
+    """ Return the minutes to wait for the next bus from the 
+    current minutes timestamp and an upcoming bus minutes timestamp.
+    """
+    difference = minutes_bus - minutes_now
+    if difference < 0:
+        difference += 60
+    return difference
 
 
 def get_next_bus_i(time, stop_times):
@@ -13,7 +23,7 @@ def get_next_bus_i(time, stop_times):
         """
         wrapped_stop_times = stop_times + [stop_times[0]]
         return wrapped_stop_times[i + 1] < stop_times[i]
-    
+
     next_bus_i = 0
     for i, stop_time in enumerate(stop_times):
 
@@ -47,7 +57,7 @@ def get_next_next_bus_i(i, stop_times):
 
 def make_stop_filtered_schedule(timestamp, stop_id):
     # Filter the complete schedule to return a dictionary of
-    # the next two buses arriving on each route
+    # the next two buses arriving on each route.
 
     filtered_schedule = {}
     schedule = make_schedule()

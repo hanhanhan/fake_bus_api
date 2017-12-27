@@ -5,7 +5,7 @@ import time
 from flask import Flask, make_response, render_template
 # Project Functions
 from bus_schedule_filter import make_stop_filtered_schedule
-
+from bus_schedule import make_schedule
 
 # Initialization
 app = Flask(__name__)
@@ -13,6 +13,13 @@ app.debug = True
 
 
 # View + Path
+@app.route('/api')
+@app.route('/')
+def full_schedule():
+    schedule = make_schedule()
+    return json.dumps(schedule)
+
+
 @app.route('/api/<stop_id>')
 def bus_stop_schedule(stop_id):
 
