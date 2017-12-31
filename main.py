@@ -1,31 +1,37 @@
 # Built In Libraries
 import json
-import re
-import time
 # Third Party Libraries
-from flask import Flask, make_response, render_template
+from flask import Flask
+from flask_socketio import SocketIO, emit
 # Project Functions
-from bus_schedule_filter import make_stop_filtered_schedule
 from bus_schedule import make_schedule
+
 
 # Initialization
 app = Flask(__name__)
 app.debug = True
+socketio = SocketIO(app)
+app.debug = True
 
 
-# View + Path
-@app.route('/api')
-@app.route('/')
-def full_schedule():
+@socketio.on('connect')
+def handle_message():
     schedule = make_schedule()
-    timestamp = time.gmtime(time.time()).tm_min
-    api_data = {'schedule': schedule, 'timestamp': timestamp}
+    print('sending schedule')
+    # emit as dictionary, not json
+    emit('schedule', schedule)
 
-    response = make_response(json.dumps(api_data))
-    response.headers['Access-Control-Allow-Origin'] = '*'
 
-    return response
+@app.route('/delay')
+def delay():
+    schedule = make_schedule()
+    for bus_stop, routes in schedule.items():
+        for route, times in routes.items():
+            for i, time in enumerate(times):
+                schedule[bus_stop][route][i] += 5.5
+    socketio.emit('schedule', schedule, broadcast=True)
+    return 'A 5.5 minute delay was triggered on all routes.'
 
 
 if __name__ == '__main__':
-    app.run()
+    socketio.run(app)

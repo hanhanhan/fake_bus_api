@@ -46,7 +46,7 @@ def make_schedule():
     """ Return a dictionary of bus stops -> routes -> arrival times in minutes
     """
     route_schedule = {route: None for route in routes}
-    schedule = {bus_stop: route_schedule for bus_stop in BUS_STOPS}
+    schedule = {bus_stop: route_schedule.copy() for bus_stop in BUS_STOPS}
 
     for bus_stop, route_schedule in schedule.items():
         for route in route_schedule:
