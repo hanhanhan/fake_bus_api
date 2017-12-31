@@ -32,34 +32,19 @@ routes_starts = { R1: r1_starts,
                   R3: r3_starts, }
 
 
-# def make_route_schedule(minutes, schedule):
-#     ''' Pass in start time in minutes and schedule dictionary to build route schedule.
-#     '''
-#     for bus_stop in BUS_STOPS:
-
-#         if bus_stop not in schedule:
-#             schedule[bus_stop] = []
-
-#         schedule[bus_stop].append(minutes)
-#         minutes = (minutes + DRIVE_TIME_BETWEEN_STOPS) % 60
-
-#     return schedule
-
-
 def get_route_times(route, bus_stop):
-    # import pdb; pdb.set_trace()
     route_times = []
+    
     for start in routes_starts[route]:
         minutes = (start + (bus_stop - 1) * DRIVE_TIME_BETWEEN_STOPS) % 60
         route_times.append(minutes)
-        # import pdb; pdb.set_trace()
+
     return route_times
 
 
 def make_schedule():
     """ Return a dictionary of bus stops -> routes -> arrival times in minutes
     """
-    # import pdb; pdb.set_trace()
     route_schedule = {route: None for route in routes}
     schedule = {bus_stop: route_schedule for bus_stop in BUS_STOPS}
 
@@ -69,16 +54,6 @@ def make_schedule():
             route_schedule[route] = stop_times
 
     return schedule
-
-
-    # schedules = {route: {} for route in routes}
-
-    # for route, schedule in schedules.items():
-    #     starts = routes_starts[route]
-    #     for start in starts:
-    #         make_route_schedule(start, schedule)
-
-    # return schedules
 
 
 if __name__ == '__main__':
