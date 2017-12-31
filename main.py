@@ -18,7 +18,6 @@ app.debug = True
 def handle_message():
     schedule = make_schedule()
     print('sending schedule')
-    # emit as dictionary, not json
     emit('schedule', schedule)
 
 
