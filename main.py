@@ -11,7 +11,6 @@ from bus_schedule import make_schedule
 app = Flask(__name__)
 app.debug = True
 socketio = SocketIO(app)
-app.debug = True
 
 
 @socketio.on('connect')
